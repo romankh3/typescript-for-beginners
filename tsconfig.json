@@ -1,0 +1,8 @@
+
+// top level properties
+{
+    "compilerOptions": {
+        "target": "es5",
+        "outDir": "dist"
+    }
+}
