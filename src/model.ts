@@ -17,8 +17,10 @@ let ownType: OwnSN = "df";
 ownType = 123;
 
 //check the type in runtime
-if(typeof ownType === "number") {
+if(typeof ownType === "string") {
     let cost: string = ownType;
+} else {
+    let cost: number = ownType;
 }
 
 // to make varialbe could be different type, use:
@@ -47,16 +49,16 @@ function saveInventoryItem(item: InventoryItem): void {
 
 //define an Enum
 enum InentoryItemType {
-    Computer,
-    Furniture
+    Computer = "computer",
+    Furniture = "furniture"
 }
 
 
 //Interfaces lives to give more information about the code, find more mistakes.
 interface InventoryItem {
     displayName: string;
-    inventoryType: InentoryItemType;
-    //or inventoryType: "computer" | "furniture",
+    // inventoryType: InentoryItemType;
+    inventoryType: "computer" | "furniture",
     // readonly property means that this property can't be updated
     readonly trackingNumber: string;
     createDate: Date;
@@ -76,10 +78,39 @@ saveInventoryItem(inventoryItem);
 //also, can be used {} object instead of the interface:
 saveInventoryItem( {
     displayName: "HP",
-    inventoryType: InentoryItemType.Computer,
+    inventoryType: InentoryItemType.Furniture,
     //or inventoryType: "computer" | "furniture",
     trackingNumber: "DLFKGDFG",
     createDate: new Date()
 })
 
 //the way to watch the errors on the complite: "tsc -w"
+
+
+// to avoid using some specific type, we can use generics for this purpose.
+function clone<T, U>(source: T, oprtions: U): T {
+    const serialized = JSON.stringify(source);
+    return JSON.parse(serialized);
+}
+
+const cloned = clone(inventoryItem, {name: "roman"});
+
+interface Map<K, V> {
+    key: K;
+    value: V;
+}
+
+class HashMap<K, V> implements Map<K, V> {
+    key: K;    
+    value: V;
+    
+
+}
+
+var keyValue: Map<string, string> = { key: "dfg", value: "dfg"}
+
+// declare keyword
+declare var Vue: any;
+
+//typescript metadata definitelytyped.org
+// search npmjs.com
